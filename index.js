@@ -122,39 +122,60 @@
 //     console.log(compra(1,2));
 
 
-/* Array - Lista de Coches en venta */
-const cars = [
-    {brand: "Toyota", model:"Supra", year:1999, price: 28000},
-    {brand: "Mazda", model:"Miata Mx", year:1998, price: 21000},
-    {brand: "Nissan", model:"GT-R Skyline", year:1999, price: 48000},
-    {brand: "Subaru", model:"Impreza", year:2003, price: 34000},
+// /* Array - Lista de Coches en venta */
+// const cars = [
+//     {brand: "toyota", model:"Supra", year:1999, price: 28000},
+//     {brand: "mazda", model:"Miata Mx", year:1998, price: 21000},
+//     {brand: "nissan", model:"GT-R Skyline", year:1999, price: 48000},
+//     {brand: "subaru", model:"Impreza", year:2003, price: 34000},
+// ];
+
+// /* Recorrido - Busqueda de coches */
+// function showMeCar(cars, fast){
+//     for(const car of cars){
+//         fast(car)
+//     }
+// }
+// showMeCar(cars,console.log);
+
+// /* Abrir live server, abrir consola de navegador. 
+// Busqueda por marca de stock, ingresando en el prompt la marca con letra inicial
+// mayuscula.*/
+
+// let searchCar = prompt("Search Cars")
+// const search = cars.find((myCar) => myCar.brand === searchCar)
+// if (searchCar === "mazda"){
+//     document.write(`${searchCar} Stock - Miata Mx`);
+// }
+// if(searchCar === "toyota"){
+//     document.write(`${searchCar} Stock - Supra`);
+// }
+// if(searchCar === "nissan"){
+//     document.write(`${searchCar} Stock - GT-R Skyline`);
+// }
+// if(searchCar === "subaru"){
+//     document.write(`${searchCar} Stock - Impreza`);
+// }
+
+// console.log(search)
+
+let headerContainer = document.getElementById("headerContainer");
+console.log(headerContainer.innerHTML);
+headerContainer.innerHTML = "<h1>Welcome to classic cars shop!</h1>"
+
+let products = document.getElementById("productsContainer");
+let cars = [
+    {brand: "Toyota", model:"Supra", year:1999, price: 28000, photo: "assets/toyotaSupra1999.jpg"},
+    {brand: "Mazda", model:"Miata Mx", year:1998, price: 21000, photo: "assets/mazdaMiata1998.jpg"},
+    {brand: "Nissan", model:"GT-R Skyline", year:1999, price: 48000, photo: "assets/nissanSkyline1999.jpg"},
+    {brand: "Subaru", model:"Impreza", year:2003, price: 34000, photo: "assets/subaruImpreza2003.jpg"},
 ];
-
-/* Recorrido - Busqueda de coches */
-function showMeCar(cars, fast){
-    for(const car of cars){
-        fast(car)
-    }
+for(const car of cars){
+    let productCard = document.createElement(`div`);
+    productCard.innerHTML =     `<img src='${car.photo}'>
+                                <h3>Brand: ${car.brand}</h3>
+                                <h4>Model: ${car.model}</h4>
+                                <p>Year: ${car.year}</p>
+                                <b>${car.price} USD</b>`;
+    products.append(productCard);
 }
-showMeCar(cars,console.log);
-
-/* Abrir live server, abrir consola de navegador. 
-Busqueda por marca de stock, ingresando en el prompt la marca con letra inicial
-mayuscula.*/
-
-let searchCar = prompt("Search Cars")
-const search = cars.find((myCar) => myCar.brand === searchCar)
-if (searchCar === "Mazda"){
-    document.write(`${searchCar} Stock - Miata Mx`);
-}
-if(searchCar === "Toyota"){
-    document.write(`${searchCar} Stock - Supra`);
-}
-if(searchCar === "Nissan"){
-    document.write(`${searchCar} Stock - GT-R Skyline`);
-}
-if(searchCar === "Subaru"){
-    document.write(`${searchCar} Stock - Impreza`);
-}
-
-console.log(search)
