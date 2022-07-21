@@ -8,16 +8,21 @@ header{
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: .25rem;
 }
-
+#productsContainer button{
+    border-color: aqua;
+    color: brown;
+}
 #productsContainer div{
-    background-color: #dafdef;
+    background-color: #fddae2;
     padding: 2%;
-    border: solid 2px rgb(99, 98, 98);
+    border: solid 2px aquamarine;
     border-radius: 8px;
     text-align: center;
+    overflow: hidden;
 }
 #productsContainer div img{
-    height: 130px;
+    height: 150px;
     width: 150px;
+    
 }
 /* cards products e */
