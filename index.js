@@ -1,24 +1,31 @@
-// let boton = document.getElementById("brtnPrincipal");
-// let evento = prompt("ingresa el evento");
-// const respuestaClick = () =>{
-    //     console.log("Respuesta evento");
-    // }
-// boton.addEventListener(evento, respuestaClick);
-
+import{ cars } from "./stock.js"
+// Header & NavBar s
 let headerContainer = document.getElementById("headerContainer");
-console.log(headerContainer.innerHTML);
-headerContainer.innerHTML = "<h1>Welcome to classic cars shop!</h1>"
+let navBar = document.createElement(`nav`);
+navBar.innerHTML += `<div class="navBarLogo">
+                        <img src="">AmazonCars
+                    </div>
+                    <div id="navBarSearch">
+                        <input type="search" placeholder="Search"></input>
+                        <button class="searchButton">Search</button>
+                    </div>
+                    <div class="navBar">
+                        <ul>
+                            <li>About Us.</li>
+                            <li>Cars.</li>
+                            <li>Contact.</li>
+                        <ul>
+                    </div>`
+                    ;
+headerContainer.append(navBar);
+// Header & NavBar e
 
+// Cards & Cart s
 let products = document.getElementById("productsContainer");
-let cars = [
-    {brand: "Toyota", model:"Supra", year:1999, price: 28000, photo: "assets/toyotaSupra1999.jpg", id:1},
-    {brand: "Mazda", model:"Miata Mx", year:1998, price: 21000, photo: "assets/mazdaMiata1998.jpg", id:2},
-    {brand: "Nissan", model:"GT-R Skyline", year:1999, price: 48000, photo: "assets/nissanSkyline1999.jpg", id:3},
-    {brand: "Subaru", model:"Impreza", year:2003, price: 34000, photo: "assets/subaruImpreza2003.jpg", id:4},
-];
+
 for(const car of cars){
     let productCard = document.createElement(`div`);
-    productCard.innerHTML +=     `<img src='${car.photo}'>
+    productCard.innerHTML +=   `<img src='${car.photo}'>
                                 <h3>Brand: ${car.brand}</h3>
                                 <h4>Model: ${car.model}</h4>
                                 <p>Year: ${car.year}</p>
@@ -28,25 +35,51 @@ for(const car of cars){
 
     const button = document.getElementById(`button${car.id}`);
     button.addEventListener("click", ()=>{
+        let cart = document.getElementById("cartContainer");
+        let showCart = document.createElement('div');
+        showCart.innerHTML += `<h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
+        cart.append(showCart);
+        localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
         alert(`Added to cart! ${car.brand}`)
     });
-}
+    let showMeCart = localStorage.getItem(car.id)
+    console.log(JSON.parse(showMeCart));
+    if(showMeCart){
+        let cart = document.getElementById("cartContainer");
+        let showCart = document.createElement('div');
+        showCart.innerHTML += `<h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
+        cart.append(showCart);
+    }
+};
+// Cards & Cart e
 
-let newsletter = document.getElementById("newsletterContainer");
-newsletter.addEventListener("submit", sendSus);
-    
+// Newsletter s
+let newsletter = document.querySelector("form");
+newsletter.addEventListener(`submit`, sendSus)
 function sendSus(e){
     e.preventDefault();
-    // console.log(e.target.children[0].value);
-    // console.log(e.target.children[1].value);
-    if(!e.target.children[0].value.includes(`@`)){
+    console.log(e.target.children[1].value);
+    if(e.target.children[1].value.includes(`@`)){
         alert("Subscribed!")
 }
 }
+// Newsletter e
 
+// newsletter.addEventListener(`submit`, sendSus);
+// let input = document.getElementById('email')
+// localStorage.setItem("email", JSON.stringify(input.value));
+// if(localStorage){
+//     alert('This email has been subscribed')
+//     let email = localStorage.getItem("email")
+//     console.log(JSON.parse(email))
+// }
 
+// const save = (key, value) => {localStorage.setItem(key, value);}
 
+// for(const car of cars){
+//     save(car.id, JSON.stringify(cars))
+// }
+// localStorage.setItem("cart", JSON.stringify(cars));
 
-
-
-
+// let cart = localStorage.getItem("cart")
+// console.log(JSON.parse(cart));

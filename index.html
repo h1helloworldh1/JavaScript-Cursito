@@ -10,14 +10,21 @@
 </head>
 <body>
     <header id="headerContainer"></header>
-    <div id="productsContainer"></div>
-    <div id="newsletterContainer">
-        <h3>Newsletter</h3>
-        Email:
-        <input type="email" id="email" placeholder="Put your e-mail here!">
-        <input type="submit" value="Subscribe">
-    </div>
-    
-    <script src="./index.js"></script>
+    <main>
+        <div id="cartContainer">
+            <h3>Cart</h3>
+        </div>
+        <div id="productsContainer"></div>
+    </main>
+    <footer>
+        <form class="newsletterContainer">
+            <h3>Newsletter</h3>
+            Email:
+            <input type="email" id="email" placeholder="Put your e-mail here!">
+            <input class="buttonSus" type="submit" value="Subscribe">
+        </form>
+    </footer>
+    <script src="./stock.js" type="module"></script>
+    <script src="./index.js" type="module"></script>
 </body>
 </html>

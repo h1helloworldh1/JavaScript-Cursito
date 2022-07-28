@@ -1,24 +1,89 @@
-header{
-    background-color: aquamarine;
+html, body{
+    padding: 0%;
+    margin: 0%;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
+/* Header Container s */
+header{
+    background-color: rgb(49, 47, 53);
+    height: 100px;
+    width: 100%;
+    display: block;
+}
+/* Header Container e */
+
+/* Nav Bar Container s */
+nav{
+    width: 100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: 140px 950px auto;
+    grid-template-rows: 100px;
+}
+.navBarLogo{
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+}
+#navBarSearch{
+    text-align: center;
+    padding: 20px;
+    align-self: center;
+}
+#navBarSearch input{
+    width: 50%;
+}
+.navBar{
+    align-self: center;
+}
+.navBar ul{
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.navBar ul li{
+    padding: 10px;
+}
+/* Nav Bar Container e */
+
+main{
+    display: grid;
+    grid-template-columns: 150px auto;
+}
+
+#cartContainer{
+    background-color: #c6bce9;
+}
 /* cards products s */
 #productsContainer{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: .25rem;
+    gap: 10px;
+    padding: 15px;
+    margin: 12px;
 }
 #productsContainer button{
-    border-color: aqua;
-    color: brown;
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(69, 69, 248);
+    border: solid 2px rgb(69, 69, 248);
+    border-radius: 2px;
 }
 #productsContainer div{
-    background-color: #fddae2;
+    background-color: #c6bce9;
     padding: 2%;
-    border: solid 2px aquamarine;
-    border-radius: 8px;
+    border: solid 2px rgb(49, 47, 53);
+    border-radius: 2px;
     text-align: center;
     overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #productsContainer div img{
     height: 150px;
@@ -26,3 +91,34 @@ header{
     
 }
 /* cards products e */
+
+/* Footer Container s */
+
+footer{
+    height: 350px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer form{
+    padding: 20px;
+    height: 150px;
+}
+#email{
+    width: 250px;
+}
+.buttonSus{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    background-color: rgba(0, 0, 255, 0.884);
+    border: solid 2px rgba(0, 0, 255, 0.884);
+    border-radius: 2px;
+}
+.buttonSus:hover{
+    background-color: rgb(54, 54, 150);
+}
+
+/* Footer Container e */
