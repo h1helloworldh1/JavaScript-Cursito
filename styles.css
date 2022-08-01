@@ -7,8 +7,8 @@ html, body{
 
 /* Header Container s */
 header{
-    background-color: rgb(49, 47, 53);
-    height: 100px;
+    background-color: #1B2430;
+    height: 60px;
     width: 100%;
     display: block;
 }
@@ -20,29 +20,36 @@ nav{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
-    grid-template-columns: 140px 950px auto;
-    grid-template-rows: 100px;
+    grid-template-columns: 200px 400px auto;
+    grid-template-rows: 60px;
 }
 .navBarLogo{
-    padding: 10px;
+    padding: 5px;
     font-size: 20px;
     text-align: center;
     align-self: center;
 }
+.navBarLogo span{
+    color: orange;
+}
 #navBarSearch{
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     align-self: center;
 }
 #navBarSearch input{
-    width: 50%;
+    width: 360px;
+    height: 25px;
+    border-radius: 7px;
+    border: transparent;
 }
 .navBar{
+    margin-left: auto;
+    margin-right: 10px;
     align-self: center;
 }
 .navBar ul{
     list-style: none;
-    padding: 10px;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -53,69 +60,99 @@ nav{
 
 main{
     display: grid;
-    grid-template-columns: 150px auto;
+    grid-template-columns: auto 180px;
+    background-color: #D6D5A8;
 }
 
 #cartContainer{
-    background-color: #c6bce9;
+    background-color: #fdfdfd;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#cartContainer h5{
+    margin-top: 0%;
+}
+.cardInCart{
+    height: 90px;
+    width: 99px;
+    border-radius: 3px;
 }
 /* cards products s */
 #productsContainer{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
     gap: 10px;
     padding: 15px;
     margin: 12px;
 }
 #productsContainer button{
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 15px;
+    width: 80px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     background-color: rgb(69, 69, 248);
     border: solid 2px rgb(69, 69, 248);
-    border-radius: 2px;
+    border-radius: 6px;
+    font-weight: bold;
 }
 #productsContainer div{
-    background-color: #c6bce9;
-    padding: 2%;
-    border: solid 2px rgb(49, 47, 53);
-    border-radius: 2px;
+    background-color: #51557E;
+    border-radius: 8px;
     text-align: center;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
 }
-#productsContainer div img{
-    height: 150px;
-    width: 150px;
-    
+#productsContainer div .cardPhoto{
+    height: 220px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 0%;
+}
+#productsContainer div .cardInfo{
+    padding: 10px;
+    color: white;
 }
 /* cards products e */
 
 /* Footer Container s */
 
 footer{
-    height: 350px;
+    height: 250px;
     width: 100%;
-    background-color: black;
+    background-color: #1B2430;
     color: white;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 footer form{
-    padding: 20px;
+    padding: 10px;
     height: 150px;
+    display: inline-block;
 }
 #email{
     width: 250px;
+    height: 25.5px;
+    border-radius: 6px 0px 0px 6px;
+    border: transparent;
+    margin-right: -4px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .buttonSus{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    background-color: rgba(0, 0, 255, 0.884);
-    border: solid 2px rgba(0, 0, 255, 0.884);
-    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgb(69, 69, 248);;
+    border: solid 2px rgb(69, 69, 248);
+    border-radius: 0px 6px 6px 0px;
+    height: 28px;
 }
 .buttonSus:hover{
     background-color: rgb(54, 54, 150);

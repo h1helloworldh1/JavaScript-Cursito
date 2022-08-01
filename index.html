@@ -3,27 +3,24 @@
 <head>
     <title>Cursito JavaScript</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- <script>
-        let d = new Date();
-        alert("Today's date is " + d);
-    </script> -->
 </head>
 <body>
     <header id="headerContainer"></header>
     <main>
+        <div id="productsContainer"></div>
         <div id="cartContainer">
             <h3>Cart</h3>
         </div>
-        <div id="productsContainer"></div>
     </main>
     <footer>
         <form class="newsletterContainer">
             <h3>Newsletter</h3>
             Email:
-            <input type="email" id="email" placeholder="Put your e-mail here!">
+            <input type="email" id="email" placeholder=" Put your e-mail here!">
             <input class="buttonSus" type="submit" value="Subscribe">
         </form>
     </footer>
+    <script src="./addToStock.js" type="module"></script>
     <script src="./stock.js" type="module"></script>
     <script src="./index.js" type="module"></script>
 </body>

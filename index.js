@@ -1,20 +1,20 @@
 import{ cars } from "./stock.js"
+
 // Header & NavBar s
 let headerContainer = document.getElementById("headerContainer");
 let navBar = document.createElement(`nav`);
 navBar.innerHTML += `<div class="navBarLogo">
-                        <img src="">AmazonCars
+                        <h1 href="#">Amazon<span>Cars</span></h1>
                     </div>
                     <div id="navBarSearch">
-                        <input type="search" placeholder="Search"></input>
-                        <button class="searchButton">Search</button>
+                        <input id="inputSearch" type="text" placeholder=" Search"></input>
                     </div>
                     <div class="navBar">
                         <ul>
                             <li>About Us.</li>
                             <li>Cars.</li>
                             <li>Contact.</li>
-                        <ul>
+                        </ul>
                     </div>`
                     ;
 headerContainer.append(navBar);
@@ -24,31 +24,32 @@ headerContainer.append(navBar);
 let products = document.getElementById("productsContainer");
 
 for(const car of cars){
-    let productCard = document.createElement(`div`);
-    productCard.innerHTML +=   `<img src='${car.photo}'>
-                                <h3>Brand: ${car.brand}</h3>
+    let productCard = document.createElement(`div`); 
+    productCard.className = `card`
+    productCard.innerHTML +=   `<div class="cardPhoto" style="background-image:url(${car.photo});" ></div>
+                                <div class="cardInfo"><h3>Brand: ${car.brand}</h3>
                                 <h4>Model: ${car.model}</h4>
                                 <p>Year: ${car.year}</p>
                                 <b>${car.price} USD</b>
-                                <br><button id="button${car.id}">Buy!</button>`;
+                                <br><button id="button${car.id}">Buy!</button></div>`;
+                                
     products.append(productCard);
-
+    
     const button = document.getElementById(`button${car.id}`);
     button.addEventListener("click", ()=>{
         let cart = document.getElementById("cartContainer");
         let showCart = document.createElement('div');
-        showCart.innerHTML += `<h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
+        showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
         cart.append(showCart);
         localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
         alert(`Added to cart! ${car.brand}`)
     });
-    let showMeCart = localStorage.getItem(car.id)
-    console.log(JSON.parse(showMeCart));
+    let showMeCart = JSON.parse(localStorage.getItem(car.id));
     if(showMeCart){
         let cart = document.getElementById("cartContainer");
         let showCart = document.createElement('div');
-        showCart.innerHTML += `<h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
-        cart.append(showCart);
+        showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
+        cart.append(showCart)
     }
 };
 // Cards & Cart e
@@ -56,30 +57,20 @@ for(const car of cars){
 // Newsletter s
 let newsletter = document.querySelector("form");
 newsletter.addEventListener(`submit`, sendSus)
+let emails = []
 function sendSus(e){
-    e.preventDefault();
-    console.log(e.target.children[1].value);
-    if(e.target.children[1].value.includes(`@`)){
-        alert("Subscribed!")
-}
-}
+    newsletter = e.target.children[1].value.includes(`@`) && alert("Subscribed!")
+    let values = document.getElementById("email").value;
+    values = e.target.children[1].value.includes(`@`) ? emails.push(values): false
+    localStorage.setItem("Emails", JSON.stringify(...emails))
+};
 // Newsletter e
 
-// newsletter.addEventListener(`submit`, sendSus);
-// let input = document.getElementById('email')
-// localStorage.setItem("email", JSON.stringify(input.value));
-// if(localStorage){
-//     alert('This email has been subscribed')
-//     let email = localStorage.getItem("email")
-//     console.log(JSON.parse(email))
-// }
+// const searchItem = document.getElementById("inputSearch");
+// const itemsCardContainer = document.getElementsByClassName("cardInfo")
 
-// const save = (key, value) => {localStorage.setItem(key, value);}
+// searchItem.addEventListener("input",(e) =>{
+//     const value = e.target.value
+//     console.log(value);
+// })
 
-// for(const car of cars){
-//     save(car.id, JSON.stringify(cars))
-// }
-// localStorage.setItem("cart", JSON.stringify(cars));
-
-// let cart = localStorage.getItem("cart")
-// console.log(JSON.parse(cart));
