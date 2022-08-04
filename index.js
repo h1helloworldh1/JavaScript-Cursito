@@ -22,7 +22,7 @@ headerContainer.append(navBar);
 
 // Cards & Cart s
 let products = document.getElementById("productsContainer");
-
+// let cart = []
 for(const car of cars){
     let productCard = document.createElement(`div`); 
     productCard.className = `card`
@@ -37,12 +37,21 @@ for(const car of cars){
     
     const button = document.getElementById(`button${car.id}`);
     button.addEventListener("click", ()=>{
+        // cart.push()
         let cart = document.getElementById("cartContainer");
         let showCart = document.createElement('div');
         showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
         cart.append(showCart);
         localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
-        alert(`Added to cart! ${car.brand}`)
+        Swal.fire({
+            color: 'white',
+            background: '#4545f8',
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Added to cart!',
+            showConfirmButton: false,
+            timer: 1500
+        })
     });
     let showMeCart = JSON.parse(localStorage.getItem(car.id));
     if(showMeCart){
@@ -57,12 +66,19 @@ for(const car of cars){
 // Newsletter s
 let newsletter = document.querySelector("form");
 newsletter.addEventListener(`submit`, sendSus)
-let emails = []
+// let emails = []
 function sendSus(e){
-    newsletter = e.target.children[1].value.includes(`@`) && alert("Subscribed!")
-    let values = document.getElementById("email").value;
-    values = e.target.children[1].value.includes(`@`) ? emails.push(values): false
-    localStorage.setItem("Emails", JSON.stringify(...emails))
+    newsletter = e.target.children[1].value.includes(`@`) && Swal.fire({
+        title: 'Sweet!',
+        text: 'Modal with a custom image.',
+        imageUrl: 'https://unsplash.it/400/200',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+    })
+    // let values = document.getElementById("email").value;
+    // values = e.target.children[1].value.includes(`@`) ? emails.push(values): false
+    // localStorage.setItem("Emails", JSON.stringify(...emails))
 };
 // Newsletter e
 
