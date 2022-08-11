@@ -1,4 +1,4 @@
-import{ cars } from "./stock.js"
+
 
 // Header & NavBar s
 let headerContainer = document.getElementById("headerContainer");
@@ -21,9 +21,12 @@ headerContainer.append(navBar);
 // Header & NavBar e
 
 // Cards & Cart s
-let products = document.getElementById("productsContainer");
-// let cart = []
-for(const car of cars){
+let products = document.getElementById("productsContainer");``
+
+fetch("./cars.json")
+.then(response => response.json())
+.then(cars => {
+cars.forEach(car => {
     let productCard = document.createElement(`div`); 
     productCard.className = `card`
     productCard.innerHTML +=   `<div class="cardPhoto" style="background-image:url(${car.photo});" ></div>
@@ -37,20 +40,19 @@ for(const car of cars){
     
     const button = document.getElementById(`button${car.id}`);
     button.addEventListener("click", ()=>{
-        // cart.push()
-        let cart = document.getElementById("cartContainer");
-        let showCart = document.createElement('div');
-        showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
-        cart.append(showCart);
-        localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
-        Swal.fire({
-            color: 'white',
-            background: '#4545f8',
-            position: 'bottom-end',
-            icon: 'success',
-            title: 'Added to cart!',
-            showConfirmButton: false,
-            timer: 1500
+    let cart = document.getElementById("cartContainer");
+    let showCart = document.createElement('div');
+    showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
+    cart.append(showCart);
+    localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
+    Swal.fire({
+        color: 'white',
+        background: '#4545f8',
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Added to cart!',
+        showConfirmButton: false,
+        timer: 1500
         })
     });
     let showMeCart = JSON.parse(localStorage.getItem(car.id));
@@ -60,33 +62,51 @@ for(const car of cars){
         showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
         cart.append(showCart)
     }
-};
+});
+})
+    
 // Cards & Cart e
 
+// fetch s
+
+// const arrivals = async() => {
+//     const list = document.getElementById("newArrivals");
+
+//     try{
+//         const response = await fetch('');
+//         const posts = await response.json();
+//         console.log(response)
+//         posts.forEach(post =>{
+//             const li = document.createElement("li");
+//             li.innerHTML = `
+//             <h4>${post.MakeName}</h4>
+//             <h5>${post.MakeId}</h5>
+//             <p>${post.VehicleTypeName}</p>
+//             `;
+//             list.append(li);
+//         })
+//     }catch (error){
+//         document.write("ERROR")
+//     }
+// }
+// arrivals();
+
+// fetch e
+
 // Newsletter s
-let newsletter = document.querySelector("form");
-newsletter.addEventListener(`submit`, sendSus)
-// let emails = []
+
 function sendSus(e){
-    newsletter = e.target.children[1].value.includes(`@`) && Swal.fire({
-        title: 'Sweet!',
-        text: 'Modal with a custom image.',
-        imageUrl: 'https://unsplash.it/400/200',
-        imageWidth: 400,
+    e.preventDefault();
+    newsletter = e.target.children[1].value.includes(`@`)
+    Swal.fire({
+        title: 'Subscribed! ',
+        text: 'thanks for subscribing!',
+        imageUrl: './assets/sweetAlert.jpg',
+        imageWidth: 350,
         imageHeight: 200,
         imageAlt: 'Custom image',
     })
-    // let values = document.getElementById("email").value;
-    // values = e.target.children[1].value.includes(`@`) ? emails.push(values): false
-    // localStorage.setItem("Emails", JSON.stringify(...emails))
 };
-// Newsletter e
 
-// const searchItem = document.getElementById("inputSearch");
-// const itemsCardContainer = document.getElementsByClassName("cardInfo")
-
-// searchItem.addEventListener("input",(e) =>{
-//     const value = e.target.value
-//     console.log(value);
-// })
-
+let newsletter = document.getElementById("form");
+newsletter.addEventListener(`submit`, sendSus);
