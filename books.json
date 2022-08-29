@@ -1,0 +1,49 @@
+[
+    {"title": "Programming Python",
+    "editorial":"O'reilly",
+    "price": 44,
+    "photo": "assets/python.jpg",
+    "id":1},
+
+    {"title": "JavaScript - The Definitive Guide",
+    "editorial":"O'reilly",
+    "price": 53,
+    "photo": "assets/javascript.jpg",
+    "id":2},
+
+    {"title": "HTML5 - Pocket Reference",
+    "editorial":"O'reilly",
+    "price": 14, 
+    "photo": "assets/html5-pocket.jpg", 
+    "id":3},
+
+    {"title": "Learning React", 
+    "editorial":"O'reilly", 
+    "price": 34, 
+    "photo": "assets/reactjs.jpg", 
+    "id":4},
+
+    {"title": "CSS - The Definitve Guide",
+    "editorial":"O'reilly",
+    "price": 51,
+    "photo": "assets/css.jpg",
+    "id":5},
+    
+    {"title": "SQL Cookbook",
+    "editorial":"O'reilly",
+    "price": 44,
+    "photo": "assets/sql.jpg",
+    "id":6},
+
+    {"title": "LINUX Systems",
+    "editorial":"O'reilly",
+    "price": 34,
+    "photo": "assets/linux.jpg",
+    "id":7},
+
+    {"title": "Mozilla",
+    "editorial":"O'reilly",
+    "price": 23,
+    "photo": "assets/mozilla.jpg",
+    "id":8}
+]

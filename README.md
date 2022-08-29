@@ -1,3 +1,3 @@
 # JavaScript-Cursito
 Hola!
-Este repositorio contendra todos los desafios del curso de JavaScript.
+Proyecto final del curso de JavaScript.

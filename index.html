@@ -3,26 +3,96 @@
 <head>
     <title>Cursito JavaScript</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-    <header id="headerContainer"></header>
-    <main>
-        <div id="productsContainer"></div>
-        <div id="cartContainer">
-            <h3>Cart</h3>
+    <!-- header container  -->
+    <header>
+        <nav class="navbar bg-dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-1 h1" 
+                style="color: white; font-size: 30px;">dev<b style="color: rgb(218, 139, 36);">books</b>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <!-- header container -->
+
+    <!-- main container  -->
+    <main class="container-fluid" style="background-color: #f7f0e2;">
+        <div id="cartContainer" class="row" style="background-color: #53637e;">
+            <h4 style="color:white; text-align: center;">My<b style="color: rgb(218, 139, 36);">cart</b></h4>
+            <table class="container-fluid table" style="color: white;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="items"></tbody>
+                <tfoot>
+                    <tr id="footer">
+                        <th scope="row" colspan="5">Your cart is empty - start buying!</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-        <ul id="newArrivals">
-        </ul>
+        <div id="cards" class="row"></div>
     </main>
-    <footer>
-        <form class="newsletterContainer" id="form">
-            <h3>Newsletter</h3>
-            Email:
-            <input type="email" id="email" placeholder=" Put your e-mail here!">
-            <input class="buttonSus" type="submit" value="Subscribe">
-        </form>
-    </footer>
+    <!-- main container  -->
+
+
+        <template id="template-footer">
+            <th scope="row" colspan="2">Total products</th>
+            <td>10</td>
+            <td>
+                <button class="btn btn-danger btn-sm" id="clean-cart">
+                    clear all
+                </button>
+            </td>
+            <td class="font-weight-bold">$ <span>0000</span></td>
+        </template>
+
+        <template id="template-cart">
+            <tr>
+                <th scope="row">id</th>
+                <td>Item</td>
+                <td>1</td>
+                <td>
+                    <button class="btn btn-info btn-sm" style="color: white;">
+                        +
+                    </button>
+                    <button class="btn btn-danger btn-sm">
+                        -
+                    </button>
+                </td>
+                <td>$ <span>500</span></td>
+            </tr>
+        </template>
+
+        <template id="template-card">
+            <div class="col-12 mt-1 mb-1 col-md-2">
+                <div class="card" style="width: 13rem;">
+                    <img src="" alt="" class="img-fluid">
+                    <div class="card-body">
+                        <h5>Title</h5>
+                        <h6>Autor</h6>
+                        <p class="price">Price</p>
+                        <button class="btn btn-primary">add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <footer class="container-fluid bg-dark">
+            <div class="row">
+                <p style="color: white; padding: 10px; text-align: center;">©devbooks is a registered trademark.</p>
+            </div>
+        </footer>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./index.js" type="module"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

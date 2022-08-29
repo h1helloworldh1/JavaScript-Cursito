@@ -1,110 +1,148 @@
+const cards = document.getElementById('cards')
+const items = document.getElementById('items')
+const footer = document.getElementById('footer')
+const templateCard = document.getElementById('template-card').content
+const templateFooter = document.getElementById('template-footer').content
+const templateCart = document.getElementById('template-cart').content
+const fragment = document.createDocumentFragment()
+let cart = {}
 
-
-// Header & NavBar s
-let headerContainer = document.getElementById("headerContainer");
-let navBar = document.createElement(`nav`);
-navBar.innerHTML += `<div class="navBarLogo">
-                        <h1 href="#">Amazon<span>Cars</span></h1>
-                    </div>
-                    <div id="navBarSearch">
-                        <input id="inputSearch" type="text" placeholder=" Search"></input>
-                    </div>
-                    <div class="navBar">
-                        <ul>
-                            <li>About Us.</li>
-                            <li>Cars.</li>
-                            <li>Contact.</li>
-                        </ul>
-                    </div>`
-                    ;
-headerContainer.append(navBar);
-// Header & NavBar e
-
-// Cards & Cart s
-let products = document.getElementById("productsContainer");``
-
-fetch("./cars.json")
-.then(response => response.json())
-.then(cars => {
-cars.forEach(car => {
-    let productCard = document.createElement(`div`); 
-    productCard.className = `card`
-    productCard.innerHTML +=   `<div class="cardPhoto" style="background-image:url(${car.photo});" ></div>
-                                <div class="cardInfo"><h3>Brand: ${car.brand}</h3>
-                                <h4>Model: ${car.model}</h4>
-                                <p>Year: ${car.year}</p>
-                                <b>${car.price} USD</b>
-                                <br><button id="button${car.id}">Buy!</button></div>`;
-                                
-    products.append(productCard);
-    
-    const button = document.getElementById(`button${car.id}`);
-    button.addEventListener("click", ()=>{
-    let cart = document.getElementById("cartContainer");
-    let showCart = document.createElement('div');
-    showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
-    cart.append(showCart);
-    localStorage.setItem(car.id, JSON.stringify(showCart.innerHTML));
-    Swal.fire({
-        color: 'white',
-        background: '#4545f8',
-        position: 'bottom-end',
-        icon: 'success',
-        title: 'Added to cart!',
-        showConfirmButton: false,
-        timer: 1500
-        })
-    });
-    let showMeCart = JSON.parse(localStorage.getItem(car.id));
-    if(showMeCart){
-        let cart = document.getElementById("cartContainer");
-        let showCart = document.createElement('div');
-        showCart.innerHTML += `<img class="cardInCart" src="${car.photo}"><h5>${car.brand} ${car.model} $ ${car.price}</h5>`;
-        cart.append(showCart)
+document.addEventListener('DOMContentLoaded',() => {
+    fetchData()
+    if(localStorage.getItem('cart')){
+        cart = JSON.parse(localStorage.getItem('cart'))
+        renderCart()
     }
-});
 })
+cards.addEventListener('click', e => {
+    addCart(e)
+})
+items.addEventListener('click', e => {
+    btnAction(e)
+})
+const fetchData = async () => {
+    try{
+        const res = await fetch('books.json')
+        const data = await res.json()
+        renderCards(data)
+    }catch (error){
+        console.log(error)
+    }
+}
+
+const renderCards = data =>{
+    data.forEach(book => {
+        templateCard.querySelector('h5').textContent = book.title
+        templateCard.querySelector('h6').textContent = book.editorial
+        templateCard.querySelector('.price').textContent = book.price
+        templateCard.querySelector('img').setAttribute("src", book.photo)
+        templateCard.querySelector('.btn-primary').dataset.id = book.id
+        const clone = templateCard.cloneNode(true)
+        fragment.appendChild(clone)
+    });
+    cards.appendChild(fragment)
+}
+const addCart = e =>{
+    if(e.target.classList.contains('btn-primary')){
+        setCart(e.target.parentElement)
+        Swal.fire({
+            color: 'white',
+            background: '#4545f8',
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Added to cart!',
+            showConfirmButton: false,
+            timer: 1500
+            })
+    }
+    e.stopPropagation()
+}
+
+const setCart = object =>{
+    const product = {
+        id: object.querySelector('.btn-primary').dataset.id,
+        title: object.querySelector('h5').textContent,
+        editorial: object.querySelector('h6').textContent,
+        price: object.querySelector('.price').textContent,
+        quantity: 1
+    }
+    if(cart.hasOwnProperty(product.id)){
+        product.quantity = cart[product.id].quantity + 1
+    }
+    cart[product.id] = {...product}
+    renderCart()
+}
+const renderCart = () =>{
+    items.innerHTML = ''
+    Object.values(cart).forEach(product =>{
+        templateCart.querySelector('th').textContent = product.id
+        templateCart.querySelectorAll('td')[0].textContent =product.title
+        templateCart.querySelectorAll('td')[1].textContent = product.quantity
+        templateCart.querySelector('.btn-info').dataset.id = product.id
+        templateCart.querySelector('.btn-danger').dataset.id = product.id
+        templateCart.querySelector('span').textContent = product.quantity * product.price
+
+        const clone = templateCart.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    items.appendChild(fragment)
     
-// Cards & Cart e
+    renderFooter()
 
-// fetch s
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
 
-// const arrivals = async() => {
-//     const list = document.getElementById("newArrivals");
+const renderFooter = () => {
+    footer.innerHTML = ''
+    if(Object.keys(cart).length === 0){
+        footer.innerHTML = `
+        <th scope="row" colspan="5">Your cart is empty - start buying!</th>
+        `
+        return
+    }
+    const nQuantity = Object.values(cart).reduce((acc, {quantity})=> acc + quantity, 0)
+    const nPrice = Object.values(cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
 
-//     try{
-//         const response = await fetch('');
-//         const posts = await response.json();
-//         console.log(response)
-//         posts.forEach(post =>{
-//             const li = document.createElement("li");
-//             li.innerHTML = `
-//             <h4>${post.MakeName}</h4>
-//             <h5>${post.MakeId}</h5>
-//             <p>${post.VehicleTypeName}</p>
-//             `;
-//             list.append(li);
-//         })
-//     }catch (error){
-//         document.write("ERROR")
-//     }
-// }
-// arrivals();
+    templateFooter.querySelectorAll('td')[0].textContent = nQuantity
+    templateFooter.querySelector('span').textContent = nPrice
 
-// fetch e
+    const clone = templateFooter.cloneNode(true)
+    fragment.appendChild(clone)
+    footer.appendChild(fragment)
+
+    const btnClean = document.getElementById('clean-cart')
+    btnClean.addEventListener('click', () =>{
+        cart = {}
+        renderCart()
+    })
+}
+const btnAction = e =>{
+    if(e.target.classList.contains('btn-info')){
+        const product = cart[e.target.dataset.id]
+        product.quantity++
+        cart[e.target.dataset.id] = { ...product }
+        renderCart()
+    }
+
+    if(e.target.classList.contains('btn-danger')){
+        const product = cart[e.target.dataset.id]
+        product.quantity--
+        if(product.quantity === 0){
+            delete cart[e.target.dataset.id]
+        }
+        renderCart()
+    }
+    e.stopPropagation()
+}
+
 
 // Newsletter s
-
 function sendSus(e){
     e.preventDefault();
     newsletter = e.target.children[1].value.includes(`@`)
     Swal.fire({
         title: 'Subscribed! ',
-        text: 'thanks for subscribing!',
-        imageUrl: './assets/sweetAlert.jpg',
-        imageWidth: 350,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
+        text: 'thanks for subscribing.',
     })
 };
 
