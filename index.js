@@ -1,3 +1,4 @@
+// Variables
 const cards = document.getElementById('cards')
 const items = document.getElementById('items')
 const footer = document.getElementById('footer')
@@ -5,8 +6,10 @@ const templateCard = document.getElementById('template-card').content
 const templateFooter = document.getElementById('template-footer').content
 const templateCart = document.getElementById('template-cart').content
 const fragment = document.createDocumentFragment()
+// Carrito
 let cart = {}
 
+// Eventos
 document.addEventListener('DOMContentLoaded',() => {
     fetchData()
     if(localStorage.getItem('cart')){
@@ -20,6 +23,7 @@ cards.addEventListener('click', e => {
 items.addEventListener('click', e => {
     btnAction(e)
 })
+// Conexion con la Api local
 const fetchData = async () => {
     try{
         const res = await fetch('books.json')
@@ -29,7 +33,7 @@ const fetchData = async () => {
         console.log(error)
     }
 }
-
+// Renderizado de la info de la api - productos
 const renderCards = data =>{
     data.forEach(book => {
         templateCard.querySelector('h5').textContent = book.title
@@ -42,6 +46,7 @@ const renderCards = data =>{
     });
     cards.appendChild(fragment)
 }
+// funciones
 const addCart = e =>{
     if(e.target.classList.contains('btn-primary')){
         setCart(e.target.parentElement)
@@ -57,7 +62,7 @@ const addCart = e =>{
     }
     e.stopPropagation()
 }
-
+// Renderizado del carrito + funciones
 const setCart = object =>{
     const product = {
         id: object.querySelector('.btn-primary').dataset.id,
@@ -134,17 +139,3 @@ const btnAction = e =>{
     }
     e.stopPropagation()
 }
-
-
-// Newsletter s
-function sendSus(e){
-    e.preventDefault();
-    newsletter = e.target.children[1].value.includes(`@`)
-    Swal.fire({
-        title: 'Subscribed! ',
-        text: 'thanks for subscribing.',
-    })
-};
-
-let newsletter = document.getElementById("form");
-newsletter.addEventListener(`submit`, sendSus);
